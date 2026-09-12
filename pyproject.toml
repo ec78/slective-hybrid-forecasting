@@ -1,0 +1,39 @@
+[project]
+name = "selective-hybrid-forecasting"
+version = "0.1.0"
+description = "Small conceptual demonstrations of when pretrained and classical forecasting methods are worth combining."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Eric Clower" }]
+
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "scipy>=1.11",
+    "statsmodels>=0.14",
+    "scikit-learn>=1.4",
+    "matplotlib>=3.8",
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+notebooks = [
+    "jupyter>=1.0",
+    "nbclient>=0.10",
+]
+chronos = [
+    "torch>=2.2",
+    "chronos-forecasting>=2.0",
+]
+dataimport = [
+    "yfinance>=0.2",
+]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
