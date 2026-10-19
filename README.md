@@ -110,7 +110,8 @@ selective-hybrid-forecasting/
 ├── topics/
 │   ├── README.md              how a week becomes a blog topic
 │   ├── backlog.md             de-duplicated candidate topics
-│   └── digests/                dated weekly crawl output (YYYY-MM-DD.md)
+│   ├── digests/                dated weekly crawl output (YYYY-MM-DD.md)
+│   └── chatgpt-reports/        dated raw drops from the external ChatGPT task
 ├── data/
 │   ├── README.md
 │   └── raw/                   electricity_ciso.csv, spy.csv (+ metadata)
