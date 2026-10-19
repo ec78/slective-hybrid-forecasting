@@ -12,3 +12,6 @@ src/*.egg-info/
 
 # Chronos / HuggingFace model cache if ever pointed at the repo
 .hf_cache/
+
+# local-machine log for scripts/sync-chatgpt-reports.ps1
+.chatgpt-sync.log
