@@ -1,0 +1,19 @@
+model,regime,context_length,mean_gain,mean_nominal_mae,n
+Chronos-2 (+covariates),excited-high,50,0.23515320725426084,8.33647707503478,4
+Chronos-2 (+covariates),excited-high,150,0.49181578141818516,2.954332056910504,4
+Chronos-2 (+covariates),excited-high,400,0.7283421633270433,1.620336648446762,4
+Chronos-2 (+covariates),excited-low,50,0.1604963788832932,0.9968279881380492,4
+Chronos-2 (+covariates),excited-low,150,0.4839531271589096,0.46548769131730844,4
+Chronos-2 (+covariates),excited-low,400,0.6725640536009101,0.22952750367513897,4
+Chronos-2 (+covariates),unexcited,50,-0.02262613704336901,0.19966680777109347,4
+Chronos-2 (+covariates),unexcited,150,-0.0034741266707297275,0.36832440185684534,4
+Chronos-2 (+covariates),unexcited,400,-0.012876370805729178,0.21746035462968574,4
+Linear ARX (per-window fit),excited-high,50,0.9988043673659114,0.11285175423330523,4
+Linear ARX (per-window fit),excited-high,150,0.997548338185106,0.08319598337876942,4
+Linear ARX (per-window fit),excited-high,400,1.0008800256792485,0.06339350431791466,4
+Linear ARX (per-window fit),excited-low,50,0.9780982135097436,0.16190096611271498,4
+Linear ARX (per-window fit),excited-low,150,0.994734461226318,0.08846053697138087,4
+Linear ARX (per-window fit),excited-low,400,0.9985600715672487,0.06705887562512419,4
+Linear ARX (per-window fit),unexcited,50,0.8578942947880467,0.10645007123401555,4
+Linear ARX (per-window fit),unexcited,150,1.019576295315486,0.06789831696332847,4
+Linear ARX (per-window fit),unexcited,400,1.0133455042832478,0.06376322177328672,4

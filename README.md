@@ -99,6 +99,40 @@ References:
 - Garcia, C., & Remy, G. (2026). *Statistical Benchmarking of Transformer
   Models in Low Signal-to-Noise Time-Series Forecasting.*
 
+### 02 — Excitation: does a good forecast mean the model knows the lever?
+
+*If a forecast closely matches what a system actually did, does that mean the model has
+learned how the system responds to its controls — or just what its existing policy tends
+to do?* Inspired by Amria et al. (2026), *Time-series Foundation Models for Predictive
+Control: The Role of Excitation* (`literature/excitation-2026.pdf`), who find that a
+TSFM can forecast a building's temperature accurately under its existing controller while
+being nearly insensitive to a hypothetical change in that controller's setpoint — unless
+the context it conditions on contains genuinely independent variation in the control
+signal ("excitation").
+
+This is the one demo in the series built on a synthetic system rather than real data —
+see the notebook for why: testing whether a forecast responds *correctly* to an
+intervention needs a ground-truth counterfactual that no historical series can provide.
+
+| Notebook | Question |
+|---|---|
+| [01_excitation_and_control_fidelity.ipynb](notebooks/02-excitation-for-control/01_excitation_and_control_fidelity.ipynb) | Does Chronos-2's forecast respond correctly to a change in a control input, and does that depend on whether its context contains independent variation in that control — separately from whether its forecast of the unperturbed trajectory is accurate? |
+
+A small linear "toy thermostat" system is driven two ways to build historical context —
+an **unexcited** closed-loop policy (control is a deterministic function of state and
+time) and an **excited** APRBS signal (control varies independently of state) — then
+scored with the paper's *response gain* metric: given several matched counterfactual
+probes that share context and differ only in future control, does the predicted response
+align with the true one? Chronos-2 (given control as a known-future covariate) and a
+linear ARX baseline fit on the context are compared across context lengths and excitation
+levels.
+
+References:
+
+- Amria, M., Hoffmann, J., Bordne, P., Rothenhäuser, A., Frison, L., Walnum, H. T.,
+  Gros, S., & Bödecker, J. (2026). *Time-series Foundation Models for Predictive Control:
+  The Role of Excitation.* NeurIPS 2026 Workshop: TS-LIMITS.
+
 *(Future posts get their own `### NN — Title` section here, following the
 same shape: question, notebook table, one paragraph per demo, references.)*
 
@@ -116,16 +150,21 @@ selective-hybrid-forecasting/
 │   ├── README.md
 │   └── raw/                   electricity_ciso.csv, spy.csv (+ metadata)
 ├── notebooks/
-│   └── 01-selective-hybrid-forecasting/   one subfolder per post
+│   ├── 01-selective-hybrid-forecasting/   one subfolder per post
+│   └── 02-excitation-for-control/
 ├── src/
 │   ├── data.py                 loaders + train/val/test split
 │   ├── evaluation.py            metrics + rolling-origin harness
 │   ├── models.py                 naive / ARIMA / Chronos / hybrid / Fourier+SARIMAX
 │   ├── residual_memory.py      causal nearest-neighbor residual retrieval
+│   ├── control.py               synthetic controllable system + response-gain metric
 │   └── dataimport.py            optional: refresh the raw CSVs
 ├── tests/                     unit tests for the metrics and causal retrieval logic
 ├── results/
-│   └── 01-selective-hybrid-forecasting/
+│   ├── 01-selective-hybrid-forecasting/
+│   │   ├── figures/
+│   │   └── metrics/
+│   └── 02-excitation-for-control/
 │       ├── figures/
 │       └── metrics/
 └── CLAUDE.md                  repo conventions + writing-style guide
@@ -144,4 +183,4 @@ pip install -e ".[chronos]"          # adds torch + chronos-forecasting (large d
 Run the test suite with `pytest`. Chronos-2 (`amazon/chronos-2`) downloads
 from Hugging Face on first use and runs on CPU unless a CUDA GPU is
 available; expect zero-shot inference to be the slowest part of Post 01's
-Demo 1 and the Chronos branch of Demo 2.
+Demo 1, the Chronos branch of Demo 2, and all of Post 02.
