@@ -16,8 +16,10 @@ new, and report it plainly either way.
 The repo also runs the topic-selection pipeline for the series: candidate
 papers land in `literature/`, a weekly scheduled crawl (and manual additions)
 feed `topics/backlog.md`, and a backlog entry becomes the next post's
-`notebooks/<NN>-<slug>/`. See [topics/README.md](topics/README.md) for the
-mechanics.
+`notebooks/<NN>-<slug>/`, and eventually a prose draft in
+`posts/<NN>-<slug>.md` once the notebook's results are in — written in the
+voice described below, not published from the repo (Eric copies it out to
+Medium). See [topics/README.md](topics/README.md) for the full mechanics.
 
 ## Repo conventions
 

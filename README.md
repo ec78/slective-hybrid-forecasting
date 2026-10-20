@@ -14,6 +14,9 @@ than just asserted.
   automatically.
 - **`notebooks/<NN>-<slug>/`** and **`results/<NN>-<slug>/`** — one numbered,
   matching pair per post.
+- **[`posts/`](posts/)** — prose drafts, one `<NN>-<slug>.md` file per post,
+  written once a notebook's results are in. Not published from here —
+  Eric copies the finished draft out to Medium.
 - **[`src/`](src/)** — the shared toolbox (data loaders, the rolling-origin
   evaluation harness, model wrappers) reused across posts.
 - **[`CLAUDE.md`](CLAUDE.md)** — repo conventions and the writing-style guide
@@ -149,6 +152,7 @@ selective-hybrid-forecasting/
 ├── data/
 │   ├── README.md
 │   └── raw/                   electricity_ciso.csv, spy.csv (+ metadata)
+├── posts/                      prose drafts, one <NN>-<slug>.md per post
 ├── notebooks/
 │   ├── 01-selective-hybrid-forecasting/   one subfolder per post
 │   └── 02-excitation-for-control/
