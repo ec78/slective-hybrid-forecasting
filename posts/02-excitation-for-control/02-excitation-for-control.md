@@ -1,18 +1,16 @@
 <!--
-DRAFT — not yet published. Status tracked in topics/backlog.md
-(in-progress, post: excitation-for-control).
+PUBLISHED: https://medium.com/@eclow/can-your-forecast-predict-the-effect-of-a-decision-7205e481a0d9
+Status tracked in topics/backlog.md (published, post: excitation-for-control).
+This file is kept as a historical record of what was published, not an
+actively-edited draft.
 
 Numbers and figures are from a one-off full-scale sweep (context lengths
 50/100/200/400/800, 20 repeats per setting) — see
 results/02-excitation-for-control/metrics/excitation_sweep_*_fullscale.csv
 and the _fullscale figures. The committed notebook itself still defaults to
 SMALL_SCALE=True (fast dev/CI run); regenerating these exact numbers means
-flipping that flag and rerunning, or using the standalone sweep script this
+flipping that flag and rerunning, or using the standalone sweep script the
 draft was produced from.
-
-Before publishing: proofread for voice, confirm the arXiv link/citation,
-and double check the image paths resolve once this is moved into whatever
-Eric actually publishes through (Medium doesn't read relative repo paths).
 -->
 
 # Does a Good Forecast Mean the Model Understands the Lever?
@@ -79,7 +77,7 @@ building simulator too, with one real-building check that explicitly can't be sc
 Think of a single room with a heater. The temperature next step depends on the
 temperature now, how hard the heater's running, and the weather outside:
 
-> T(next) = 0.85 × T(now) + 0.4 × U(now) + 0.1 × D(now) + a little noise
+![T(t+1) = 0.85 T(t) + 0.4 U(t) + 0.1 D(t) + noise](room_temperature_equation.png)
 
 `T` is room temperature — what we're forecasting. `U` is the controllable heater input.
 `D` is the weather — real, but not something anyone's controlling. All three of those
@@ -104,7 +102,7 @@ I generate historical data for this toy room two different ways:
 
 Same system underneath, two very different kinds of history to learn from.
 
-![Same system, three ways of generating historical context](../results/02-excitation-for-control/figures/example_regimes_fullscale.png)
+![Same system, three ways of generating historical context](../../results/02-excitation-for-control/figures/example_regimes_fullscale.png)
 
 You can see the difference by eye before measuring anything: the unexcited control signal
 (left) is a smooth, slow mirror of the temperature trace above it — of course it is, it's
@@ -170,12 +168,12 @@ least correct about what would happen under a change. That's the entire point ma
 concrete: these are different axes, and optimizing or evaluating only one of them tells
 you nothing about the other.
 
-![Response gain by excitation regime and context length](../results/02-excitation-for-control/figures/gain_and_mae_by_regime_fullscale.png)
+![Response gain by excitation regime and context length](../../results/02-excitation-for-control/figures/gain_and_mae_by_regime_fullscale.png)
 
 One example, zoomed in — a single window, longest context, unexcited versus the most
 excited regime, five probes each:
 
-![Chronos-2's predicted response to each probe, against the truth](../results/02-excitation-for-control/figures/example_probes_fullscale.png)
+![Chronos-2's predicted response to each probe, against the truth](../../results/02-excitation-for-control/figures/example_probes_fullscale.png)
 
 Under unexcited context (left), the five dashed prediction lines barely separate from
 each other, while the five solid true-outcome lines fan out a lot — the model is

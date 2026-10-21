@@ -14,9 +14,11 @@ than just asserted.
   automatically.
 - **`notebooks/<NN>-<slug>/`** and **`results/<NN>-<slug>/`** — one numbered,
   matching pair per post.
-- **[`posts/`](posts/)** — prose drafts, one `<NN>-<slug>.md` file per post,
-  written once a notebook's results are in. Not published from here —
-  Eric copies the finished draft out to Medium.
+- **[`posts/`](posts/)** — prose drafts, one `<NN>-<slug>.md` file per post
+  (or `<NN>-<slug>/` with the same name if it needs supporting assets, e.g.
+  a rendered equation image), written once a notebook's results are in. Not
+  published from here — Eric publishes the finished draft to Medium; the
+  file stays as a historical record afterward.
 - **[`src/`](src/)** — the shared toolbox (data loaders, the rolling-origin
   evaluation harness, model wrappers) reused across posts.
 - **[`CLAUDE.md`](CLAUDE.md)** — repo conventions and the writing-style guide
@@ -103,6 +105,8 @@ References:
   Models in Low Signal-to-Noise Time-Series Forecasting.*
 
 ### 02 — Excitation: does a good forecast mean the model knows the lever?
+
+Published: [Can Your Forecast Predict the Effect of a Decision?](https://medium.com/@eclow/can-your-forecast-predict-the-effect-of-a-decision-7205e481a0d9)
 
 *If a forecast closely matches what a system actually did, does that mean the model has
 learned how the system responds to its controls — or just what its existing policy tends
