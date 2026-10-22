@@ -140,6 +140,38 @@ References:
   Gros, S., & Bödecker, J. (2026). *Time-series Foundation Models for Predictive Control:
   The Role of Excitation.* NeurIPS 2026 Workshop: TS-LIMITS.
 
+### 03 — Is the expensive refiner worth it?
+
+*Does predicting a cheap, global shape first — then spending an expensive model's effort
+only on what's left over — actually beat running the expensive model on its own?*
+Inspired by SCALER (Le et al., 2026, KDD — `literature/scaler-2026.pdf`), a fully
+trained coarse-Transformer + frozen-LLM-refiner architecture; not reproduced here, just
+its underlying idea, rebuilt as a small analogue from pieces this repo already has:
+seasonal-naive as the coarse shape (Post 01), the nearest-neighbor residual-memory
+retrieval from Post 01 Demo 2 as a cheap refiner, and Chronos-2 zero-shot as an expensive
+refiner — both refiners pointed at the coarse model's residual instead of the raw series.
+
+| Notebook | Question |
+|---|---|
+| [01_coarse_to_fine_hybrids.ipynb](notebooks/03-coarse-to-fine-hybrids/01_coarse_to_fine_hybrids.ipynb) | Does a cheap coarse shape plus a refiner beat Chronos-2 forecasting the raw series directly — on accuracy, on cost, or either? |
+
+**Honest result, at full scale (n=56 origins per horizon, not a smoke-test sample):
+no.** Neither refiner, tuned or not, beats Chronos-2 on the raw series at the short or
+medium horizon; at the long horizon the best any tuned variant achieves is matching plain
+seasonal-naive, because validation data selects a refinement weight of zero there — it
+correctly learns there's nothing useful to add, not that the mechanism works. A likely
+reason: Chronos-2 already captures CISO's daily/weekly shape well enough zero-shot that
+handing it the shape for free has nothing left to buy, unlike SCALER's own setting, where
+the refiner is an LLM without native time-series pretraining. A second, unplanned finding:
+the "cheap" residual-memory refiner isn't actually cheap at full history scale — its
+brute-force nearest-neighbor search over tens of thousands of candidate windows ends up
+costing as much as a Chronos-2 call, sometimes more.
+
+References:
+
+- Le, X.-M., Tran, M.-T., Luo, L., Aickelin, U., Phung, D., & Le, T. (2026). *Efficient
+  Test-Time Scaling for LLM-based Time Series Forecasting.* KDD 2026.
+
 *(Future posts get their own `### NN — Title` section here, following the
 same shape: question, notebook table, one paragraph per demo, references.)*
 
@@ -159,20 +191,25 @@ selective-hybrid-forecasting/
 ├── posts/                      prose drafts, one <NN>-<slug>.md per post
 ├── notebooks/
 │   ├── 01-selective-hybrid-forecasting/   one subfolder per post
-│   └── 02-excitation-for-control/
+│   ├── 02-excitation-for-control/
+│   └── 03-coarse-to-fine-hybrids/
 ├── src/
 │   ├── data.py                 loaders + train/val/test split
 │   ├── evaluation.py            metrics + rolling-origin harness
 │   ├── models.py                 naive / ARIMA / Chronos / hybrid / Fourier+SARIMAX
 │   ├── residual_memory.py      causal nearest-neighbor residual retrieval
 │   ├── control.py               synthetic controllable system + response-gain metric
+│   ├── coarse_to_fine.py        cheap shape model + pluggable residual refiner
 │   └── dataimport.py            optional: refresh the raw CSVs
 ├── tests/                     unit tests for the metrics and causal retrieval logic
 ├── results/
 │   ├── 01-selective-hybrid-forecasting/
 │   │   ├── figures/
 │   │   └── metrics/
-│   └── 02-excitation-for-control/
+│   ├── 02-excitation-for-control/
+│   │   ├── figures/
+│   │   └── metrics/
+│   └── 03-coarse-to-fine-hybrids/
 │       ├── figures/
 │       └── metrics/
 └── CLAUDE.md                  repo conventions + writing-style guide
@@ -191,4 +228,5 @@ pip install -e ".[chronos]"          # adds torch + chronos-forecasting (large d
 Run the test suite with `pytest`. Chronos-2 (`amazon/chronos-2`) downloads
 from Hugging Face on first use and runs on CPU unless a CUDA GPU is
 available; expect zero-shot inference to be the slowest part of Post 01's
-Demo 1, the Chronos branch of Demo 2, and all of Post 02.
+Demo 1, the Chronos branch of Demo 2, all of Post 02, and the Chronos-refiner
+branch of Post 03.
