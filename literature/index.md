@@ -21,6 +21,7 @@ of naming a local file.
 | [arxiv 2608.14106](https://arxiv.org/abs/2608.14106) | Forecast Collapse in Time-Series Foundation Models | Wan, Ma et al. — arXiv, Aug 2026 | 2026-10-19 | unread | TSFMs give near-flat, poorly-ranked stock return forecasts; relevant to SPY series. Abstract not verified directly. |
 | [arxiv 2609.24559](https://arxiv.org/abs/2609.24559) | t0: A Time-Series Foundation Model for Forecasting with Context | The Forecasting Company — arXiv, Sep 2026 | 2026-10-19 | unread | Open-weights TSFM using past and known-future covariates; pairs with Demo 3 / CISO. |
 | [arxiv 2608.08675](https://arxiv.org/abs/2608.08675) | Efficient Test-Time Scaling for LLM-based Time Series Forecasting (SCALER) | Le et al. — KDD 2026 | 2026-10-19 | unread | Coarse shape model guiding LLM residual refinement; cousin of CTRL and Demo 2. |
+| [arxiv 2606.14222](https://arxiv.org/abs/2606.14222) | Learning the Context of Errors: Black-Box Online Adaptation of Time Series Foundation Models (ORCA) | Dai et al. — Ant International / CUHK, Jun 2026 | 2026-10-26 | unread | Online residual adapter for black-box TSFMs; cousin of Demo 2 and CTRL. Abstract seen via search summary only. |
 
 **Status values:** `unread` / `reading` / `used-in-<post-slug>` / `skipped`
 (skipped = read, not a fit — leave a one-line reason in Notes rather than
