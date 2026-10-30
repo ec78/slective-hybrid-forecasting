@@ -45,7 +45,14 @@ the second will likely hit a small conflict in `backlog.md`/
   a dated file directly into `chatgpt-reports/` — see that directory's
   README for the convention. It commits straight to `main`; nothing to
   review before it lands, since it's additive and doesn't touch a shared
-  file. The next Monday run folds it in.
+  file. The next Monday run folds it in. **Status as of 2026-10-30: this
+  side has produced nothing since the initial connection test on
+  2026-10-19** — the local sync script (`scripts/sync-chatgpt-reports.ps1`,
+  runs daily, see `.chatgpt-sync.log`) has found no new file on either
+  Friday since, including two expected report dates. That script is
+  confirmed working (it correctly finds nothing, and handled one offline
+  day cleanly); the gap is upstream, on ChatGPT's own task — check its
+  schedule/run history directly, which this repo has no visibility into.
 - **Anything else:** add rows to `backlog.md` or PDFs + index rows to
   `literature/` by hand whenever you come across something, or paste
   findings into a Claude Code chat and ask for them to be merged — faster
@@ -57,6 +64,13 @@ When a backlog entry turns into a real post:
 
 1. Mark it `in-progress (post: <slug>)` in `backlog.md`.
 2. Add a `notebooks/<NN>-<slug>/` + `results/<NN>-<slug>/` pair (see the
-   root [README.md](../README.md) for the convention).
-3. Once published, mark it `published (post: <slug>)` and add the post to
-   the root README's list of companion posts.
+   root [README.md](../README.md) for the convention), and a `### NN —
+   Title` section to the root README summarizing the question and result —
+   honestly, including a null or mixed one (see CLAUDE.md's editorial
+   stance). Run the full-scale numbers before writing this up; the
+   notebook's own committed output is a `SMALL_SCALE=True` smoke test.
+3. Draft the prose in `posts/<NN>-<slug>.md`, in the voice CLAUDE.md
+   describes, using those full-scale numbers.
+4. Once Eric publishes the draft externally, add the live link to both the
+   draft's own header comment and the root README's `### NN` section, and
+   flip the backlog row to `published (post: <slug>)`.
